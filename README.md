@@ -4,8 +4,7 @@
 ###2.微信的语音发送实现网上已经很多了,在这里打算做一个QQ语音发送的效果,此模块正在开发中....
 
 ##**DEMO效果**
-![这里写图片描述](http://img.blog.csdn.net/20160825090621156)
-
+![Mou icon](http://g.recordit.co/xHPyiWW5sL.gif)
 ##**类的介绍**
 ![这里写图片描述](http://img.blog.csdn.net/20160825084343802)
 
