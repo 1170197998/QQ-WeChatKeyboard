@@ -43,18 +43,18 @@
     switch (buttonType) {
         case MoreButtonViewButtonTypeImages:
         {
-//            UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
-//            ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-//            ipc.delegate = self;
-//            [self presentViewController:ipc animated:YES completion:nil];
+            UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+            ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            ipc.delegate = self;
+            [self presentViewController:ipc animated:YES completion:nil];
         } break;
             
         case MoreButtonViewButtonTypeCamera:
         {
-//            UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
-//            ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
-//            ipc.delegate = self;
-//            [self presentViewController:ipc animated:YES completion:nil];
+            UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+            ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
+            ipc.delegate = self;
+            [self presentViewController:ipc animated:YES completion:nil];
         } break;
             
         default:

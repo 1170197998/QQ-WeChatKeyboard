@@ -173,6 +173,7 @@ static InputToolbar* _instance = nil;
     } else {
         string = self.textInput.text;
     }
+    self.textInput.text = [string stringByAppendingString:text];
     _textInputHeight = ceilf([self.textInput sizeThatFits:CGSizeMake(self.textInput.bounds.size.width, MAXFLOAT)].height);
     self.textInput.scrollEnabled = _textInputHeight > _TextInputMaxHeight && _TextInputMaxHeight > 0;
     if (self.textInput.scrollEnabled) {
@@ -185,7 +186,6 @@ static InputToolbar* _instance = nil;
         self.height = _textInputHeight + 15;
     }
     self.leftButton.y = self.emojiButton.y = self.moreButton.y = self.height - self.leftButton.height - 12;
-    self.textInput.text = [string stringByAppendingString:text];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
