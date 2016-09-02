@@ -40,4 +40,15 @@
     }
 }
 
+- (void)setImage:(UIImage *)image
+{
+    if (image) {
+        [self.button setImage:image forState:UIControlStateNormal];
+        [self.button setImage:image forState:UIControlStateHighlighted];
+    } else {
+        [self.button setImage:nil forState:UIControlStateNormal];
+        [self.button setImage:nil forState:UIControlStateHighlighted];
+    }
+}
+
 @end

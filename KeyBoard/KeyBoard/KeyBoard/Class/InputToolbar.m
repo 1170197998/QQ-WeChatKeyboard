@@ -160,20 +160,35 @@ static InputToolbar* _instance = nil;
     self.leftButton.y = self.emojiButton.y = self.moreButton.y = self.height - self.leftButton.height - 12;
 }
 
-- (void)emojiButtonView:(EmojiButtonView *)emojiButtonView emojiText:(NSString *)text
+- (void)emojiButtonView:(EmojiButtonView *)emojiButtonView emojiText:(NSObject *)text
 {
     if ([text  isEqual: deleteButtonId]) {
         [self.textInput deleteBackward];
         return;
     }
-    
-    NSString *string;
-    if (self.textInput.text.length == 0) {
-        string = @"";
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.textInput.attributedText];
+    if ([text isKindOfClass:[NSString class]]) {
+        
+        NSString *string;
+        if (self.textInput.text.length == 0) {
+            string = @"";
+        } else {
+            string = self.textInput.text;
+        }
+//        attributedString = [[NSMutableAttributedString alloc] initWithString:string];
     } else {
-        string = self.textInput.text;
+        NSTextAttachment *textAttachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil] ;
+        textAttachment.image = (UIImage *)text; //要添加的图片
+        textAttachment.bounds = CGRectMake(0, 0, 25, 25);
+
+        NSAttributedString *textAttachmentString = [NSAttributedString attributedStringWithAttachment:textAttachment];
+        [attributedString insertAttributedString:textAttachmentString atIndex:attributedString.length];
     }
-    self.textInput.text = [string stringByAppendingString:text];
+    
+    
+
+    
+    self.textInput.attributedText = attributedString;
     _textInputHeight = ceilf([self.textInput sizeThatFits:CGSizeMake(self.textInput.bounds.size.width, MAXFLOAT)].height);
     self.textInput.scrollEnabled = _textInputHeight > _TextInputMaxHeight && _TextInputMaxHeight > 0;
     if (self.textInput.scrollEnabled) {

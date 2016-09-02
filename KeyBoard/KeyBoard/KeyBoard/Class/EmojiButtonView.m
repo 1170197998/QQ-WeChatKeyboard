@@ -13,7 +13,7 @@
 #import "CollectionViewFlowLayout.h"
 #import "EmojiCollectionViewCell.h"
 #import "UIView+Extension.h"
-
+#import "Emotion.h"
 @interface EmojiButtonView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (nonatomic,strong)UIView *emojiFooterView;
 @property (nonatomic,strong)UIScrollView *emojiFooterScrollView;
@@ -23,6 +23,8 @@
 @property (nonatomic,strong)UIButton *emojiButotn;
 @property (nonatomic,strong)CollectionViewFlowLayout *layout;
 @property (nonatomic,strong)NSMutableArray *defaultEmoticons;
+@property (nonatomic,strong)NSMutableArray *emoticons;
+
 @end
 
 @implementation EmojiButtonView
@@ -32,7 +34,10 @@
     if (self = [super initWithFrame:frame]) {
         
         _defaultEmoticons = [NSMutableArray array];
-
+        Emotion *emotion = [[Emotion alloc] init];
+        [emotion inits];
+        
+        
         for (int i=0x1F600; i<=0x1F64F; i++) {
             if (i < 0x1F641 || i > 0x1F644) {
                 int sym = EMOJI_CODE_TO_SYMBOL(i);
@@ -40,6 +45,8 @@
                 [_defaultEmoticons addObject:emoT];
             }
         }
+        
+        [_defaultEmoticons addObjectsFromArray:emotion.images];
         
         for (NSInteger i = 0;i < _defaultEmoticons.count;i ++) {
             if (i == 20 || i == 41 || i == 62 || i == 83) {
@@ -127,14 +134,20 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     EmojiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
-    cell.string = self.defaultEmoticons[indexPath.row];
+    
+    if ([self.defaultEmoticons[indexPath.row] isKindOfClass:[UIImage class]]) {
+        cell.image = self.defaultEmoticons[indexPath.row];
+    } else {
+        cell.string = self.defaultEmoticons[indexPath.row];
+    }
+    
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *str = self.defaultEmoticons[indexPath.row];
-    if (str.length != 0) {
+    NSObject *str = self.defaultEmoticons[indexPath.row];
+    if (str) {
         if ([_delegate respondsToSelector:@selector(emojiButtonView:emojiText:)]) {
             [_delegate emojiButtonView:self emojiText:str];
         }

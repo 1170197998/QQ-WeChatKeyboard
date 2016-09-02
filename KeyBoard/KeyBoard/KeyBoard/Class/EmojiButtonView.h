@@ -10,7 +10,7 @@
 #import "EmojiCollectionViewCell.h"
 @class EmojiButtonView;
 @protocol EmojiButtonViewDelegate <NSObject>
-- (void)emojiButtonView:(EmojiButtonView *)emojiButtonView emojiText:(NSString *)text;
+- (void)emojiButtonView:(EmojiButtonView *)emojiButtonView emojiText:(NSObject *)text;
 - (void)emojiButtonView:(EmojiButtonView *)emojiButtonView sendButtonClick:(UIButton *)sender;
 @end
 
