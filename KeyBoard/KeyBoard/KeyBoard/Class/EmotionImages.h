@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-@interface Emotion : NSObject
+@interface EmotionImages : NSObject
 @property(nonatomic,strong)NSArray* emotions;
 @property(nonatomic,strong)NSArray<UIImage*>* images;
-- (void)inits;
+- (void)initEmotionImages;
++ (EmotionImages *)shareEmotinImages;
+
 @end

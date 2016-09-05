@@ -13,7 +13,7 @@
 #import "CollectionViewFlowLayout.h"
 #import "EmojiCollectionViewCell.h"
 #import "UIView+Extension.h"
-#import "Emotion.h"
+#import "EmotionImages.h"
 @interface EmojiButtonView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (nonatomic,strong)UIView *emojiFooterView;
 @property (nonatomic,strong)UIScrollView *emojiFooterScrollView;
@@ -21,9 +21,10 @@
 @property (nonatomic,strong)UICollectionView *collectionView;
 @property (nonatomic,strong)UIButton *sendButton;
 @property (nonatomic,strong)UIButton *emojiButotn;
+@property (nonatomic,strong)UIButton *emojiImageButotn;
 @property (nonatomic,strong)CollectionViewFlowLayout *layout;
 @property (nonatomic,strong)NSMutableArray *defaultEmoticons;
-@property (nonatomic,strong)NSMutableArray *emoticons;
+@property (nonatomic,strong)NSArray *emoticonImages;
 
 @end
 
@@ -34,22 +35,22 @@
     if (self = [super initWithFrame:frame]) {
         
         _defaultEmoticons = [NSMutableArray array];
-        Emotion *emotion = [[Emotion alloc] init];
-        [emotion inits];
-        
+        _emoticonImages = [NSMutableArray array];
+        [[EmotionImages shareEmotinImages] initEmotionImages];
+        _emoticonImages = [EmotionImages shareEmotinImages].images;
         
         for (int i=0x1F600; i<=0x1F64F; i++) {
-            if (i < 0x1F641 || i > 0x1F644) {
+            if (i < 0x1F641 || i > 0x1F640) {
                 int sym = EMOJI_CODE_TO_SYMBOL(i);
                 NSString *emoT = [[NSString alloc] initWithBytes:&sym length:sizeof(sym) encoding:NSUTF8StringEncoding];
                 [_defaultEmoticons addObject:emoT];
             }
         }
         
-        [_defaultEmoticons addObjectsFromArray:emotion.images];
+        [_defaultEmoticons addObjectsFromArray:[EmotionImages shareEmotinImages].images];
         
         for (NSInteger i = 0;i < _defaultEmoticons.count;i ++) {
-            if (i == 20 || i == 41 || i == 62 || i == 83) {
+            if (i == 20 || i == 41 || i == 62 || i == 83 || i == 104 || i == 125 || i == 146 || i == 167) {
                 [_defaultEmoticons insertObject:deleteButtonId atIndex:i];
             }
         }
@@ -92,11 +93,19 @@
     [self.emojiFooterView addSubview:self.emojiFooterScrollView];
     
     self.emojiButotn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH / 6, 40)];
-    self.emojiButotn.backgroundColor = [UIColor colorWithRed:230 / 255.0 green:230 / 255.0 blue:230 / 255.0 alpha:1];
     [self.emojiButotn setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_nor"] forState:UIControlStateNormal];
-    [self.emojiButotn setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_press"] forState:UIControlStateHighlighted];
+    [self.emojiButotn setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_press"] forState:UIControlStateSelected];
+    [self.emojiButotn addTarget:self action:@selector(clickEmojiButton) forControlEvents:UIControlEventTouchUpInside];
     [self.emojiFooterScrollView addSubview:self.emojiButotn];
-    
+    self.emojiButotn.selected = YES;
+
+    self.emojiImageButotn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 6, 0, SCREEN_WIDTH / 6, 40)];
+    [self.emojiImageButotn setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_nor"] forState:UIControlStateNormal];
+    [self.emojiImageButotn setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_press"] forState:UIControlStateSelected];
+    [self.emojiImageButotn addTarget:self action:@selector(clickEmojiImageButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.emojiFooterScrollView addSubview:self.emojiImageButotn];
+    self.emojiImageButotn.selected = NO;
+
     self.layout = [[CollectionViewFlowLayout alloc] init];
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130) collectionViewLayout:self.layout];
@@ -110,14 +119,25 @@
     self.pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     self.pageControl.pageIndicatorTintColor = [UIColor grayColor];
     
-    self.pageControl.numberOfPages = self.defaultEmoticons.count / 21;
+    self.pageControl.numberOfPages = (self.defaultEmoticons.count - self.emoticonImages.count) / 21;
     [self addSubview:self.pageControl];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (scrollView == self.collectionView) {
-        self.pageControl.currentPage = (scrollView.contentOffset.x / SCREEN_WIDTH);
+        if (scrollView.contentOffset.x >= SCREEN_WIDTH * ((self.defaultEmoticons.count - self.emoticonImages.count) / 21)) {
+            self.pageControl.numberOfPages = self.emoticonImages.count % 21 == 0 ? self.emoticonImages.count % 21 : self.emoticonImages.count % 21 + 1 ;
+            self.pageControl.currentPage = ((scrollView.contentOffset.x - SCREEN_WIDTH * ((self.defaultEmoticons.count - self.emoticonImages.count) / 21)) / SCREEN_WIDTH);
+            self.emojiButotn.selected = NO;
+            self.emojiImageButotn.selected = YES;
+
+        } else {
+            self.pageControl.numberOfPages = (self.defaultEmoticons.count - self.emoticonImages.count) / 21;
+            self.pageControl.currentPage = (scrollView.contentOffset.x / SCREEN_WIDTH);
+            self.emojiButotn.selected = YES;
+            self.emojiImageButotn.selected = NO;
+        }
     }
 }
 
@@ -152,6 +172,24 @@
             [_delegate emojiButtonView:self emojiText:str];
         }
     }
+}
+
+- (void)clickEmojiButton
+{
+    self.emojiButotn.selected = YES;
+    self.emojiImageButotn.selected = NO;
+    [self.collectionView setContentOffset:CGPointMake(0, 0) animated:0];
+    self.pageControl.numberOfPages = (self.defaultEmoticons.count - self.emoticonImages.count) / 21;
+    self.pageControl.currentPage = (self.collectionView.contentOffset.x / SCREEN_WIDTH);
+}
+
+- (void)clickEmojiImageButton
+{
+    self.emojiButotn.selected = NO;
+    self.emojiImageButotn.selected = YES;
+    [self.collectionView setContentOffset:CGPointMake(SCREEN_WIDTH * 4, 0) animated:0];
+    self.pageControl.numberOfPages = self.emoticonImages.count % 21 == 0 ? self.emoticonImages.count % 21 : self.emoticonImages.count % 21 + 1 ;
+    self.pageControl.currentPage = ((self.collectionView.contentOffset.x - SCREEN_WIDTH * ((self.defaultEmoticons.count - self.emoticonImages.count) / 21)) / SCREEN_WIDTH);
 }
 
 - (void)clickSenderButton:(UIButton *)sender

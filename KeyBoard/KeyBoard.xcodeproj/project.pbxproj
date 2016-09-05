@@ -101,7 +101,8 @@
 		9A31E6451D796E8500577565 /* emotion0086@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A31E5D71D796E8500577565 /* emotion0086@2x.png */; };
 		9A31E6461D796E8500577565 /* emotion0087@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A31E5D81D796E8500577565 /* emotion0087@2x.png */; };
 		9A31E6471D796E8500577565 /* emotion0088@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A31E5D91D796E8500577565 /* emotion0088@2x.png */; };
-		9A31E6601D796F3800577565 /* Emotion.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A31E65F1D796F3800577565 /* Emotion.m */; };
+		9A31E6601D796F3800577565 /* EmotionImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A31E65F1D796F3800577565 /* EmotionImages.m */; };
+		9A3770DB1D7D2C620093E6C3 /* UITextView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3770DA1D7D2C620093E6C3 /* UITextView+Category.m */; };
 		9A3FCB8C1D6548BF0058D4A4 /* PushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A3FCB8B1D6548BF0058D4A4 /* PushViewController.m */; };
 		9A702BA81D65A1FA00B40D65 /* img_defaulthead_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A702BA51D65A1FA00B40D65 /* img_defaulthead_nor.png */; };
 		9A702BA91D65A1FA00B40D65 /* img_defaulthead_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A702BA61D65A1FA00B40D65 /* img_defaulthead_nor@2x.png */; };
@@ -246,8 +247,10 @@
 		9A31E5D71D796E8500577565 /* emotion0086@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emotion0086@2x.png"; sourceTree = "<group>"; };
 		9A31E5D81D796E8500577565 /* emotion0087@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emotion0087@2x.png"; sourceTree = "<group>"; };
 		9A31E5D91D796E8500577565 /* emotion0088@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "emotion0088@2x.png"; sourceTree = "<group>"; };
-		9A31E65E1D796F3800577565 /* Emotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emotion.h; sourceTree = "<group>"; };
-		9A31E65F1D796F3800577565 /* Emotion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emotion.m; sourceTree = "<group>"; };
+		9A31E65E1D796F3800577565 /* EmotionImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmotionImages.h; sourceTree = "<group>"; };
+		9A31E65F1D796F3800577565 /* EmotionImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionImages.m; sourceTree = "<group>"; };
+		9A3770D91D7D2C620093E6C3 /* UITextView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Category.h"; sourceTree = "<group>"; };
+		9A3770DA1D7D2C620093E6C3 /* UITextView+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Category.m"; sourceTree = "<group>"; };
 		9A3FCB8A1D6548BF0058D4A4 /* PushViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushViewController.h; sourceTree = "<group>"; };
 		9A3FCB8B1D6548BF0058D4A4 /* PushViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushViewController.m; sourceTree = "<group>"; };
 		9A702BA51D65A1FA00B40D65 /* img_defaulthead_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = img_defaulthead_nor.png; path = Assets.xcassets/img_defaulthead_nor.imageset/img_defaulthead_nor.png; sourceTree = "<group>"; };
@@ -511,16 +514,18 @@
 				9AB006C11D6C4BBD007A0EB5 /* LeftButtonView.m */,
 				9AB006BA1D6C4BBD007A0EB5 /* EmojiButtonView.h */,
 				9AB006BB1D6C4BBD007A0EB5 /* EmojiButtonView.m */,
-				9AB006C21D6C4BBD007A0EB5 /* MoreButtonView.h */,
-				9AB006C31D6C4BBD007A0EB5 /* MoreButtonView.m */,
 				9AB006B81D6C4BBD007A0EB5 /* CollectionViewFlowLayout.h */,
 				9AB006B91D6C4BBD007A0EB5 /* CollectionViewFlowLayout.m */,
 				9AB006BC1D6C4BBD007A0EB5 /* EmojiCollectionViewCell.h */,
 				9AB006BD1D6C4BBD007A0EB5 /* EmojiCollectionViewCell.m */,
+				9AB006C21D6C4BBD007A0EB5 /* MoreButtonView.h */,
+				9AB006C31D6C4BBD007A0EB5 /* MoreButtonView.m */,
 				9AB006C41D6C4BBD007A0EB5 /* UIView+Extension.h */,
 				9AB006C51D6C4BBD007A0EB5 /* UIView+Extension.m */,
-				9A31E65E1D796F3800577565 /* Emotion.h */,
-				9A31E65F1D796F3800577565 /* Emotion.m */,
+				9A31E65E1D796F3800577565 /* EmotionImages.h */,
+				9A31E65F1D796F3800577565 /* EmotionImages.m */,
+				9A3770D91D7D2C620093E6C3 /* UITextView+Category.h */,
+				9A3770DA1D7D2C620093E6C3 /* UITextView+Category.m */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -721,11 +726,12 @@
 				9AB006CC1D6C4BBD007A0EB5 /* UIView+Extension.m in Sources */,
 				9A171F311D64796700D48B84 /* ViewController.m in Sources */,
 				9AB006C71D6C4BBD007A0EB5 /* EmojiButtonView.m in Sources */,
-				9A31E6601D796F3800577565 /* Emotion.m in Sources */,
+				9A31E6601D796F3800577565 /* EmotionImages.m in Sources */,
 				9AB006CB1D6C4BBD007A0EB5 /* MoreButtonView.m in Sources */,
 				9AB006C81D6C4BBD007A0EB5 /* EmojiCollectionViewCell.m in Sources */,
 				9A171F2E1D64796700D48B84 /* AppDelegate.m in Sources */,
 				9AB006C91D6C4BBD007A0EB5 /* InputToolbar.m in Sources */,
+				9A3770DB1D7D2C620093E6C3 /* UITextView+Category.m in Sources */,
 				9A3FCB8C1D6548BF0058D4A4 /* PushViewController.m in Sources */,
 				9A171F2B1D64796700D48B84 /* main.m in Sources */,
 				9AB006CA1D6C4BBD007A0EB5 /* LeftButtonView.m in Sources */,

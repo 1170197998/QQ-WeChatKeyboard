@@ -123,7 +123,7 @@ static InputToolbar* _instance = nil;
     [self addSubview:self.leftButton];
     
     self.textInput = [[UITextView alloc] initWithFrame:CGRectMake(50, 5, SCREEN_WIDTH - 150, 36)];
-    self.textInput.font = [UIFont systemFontOfSize:16];
+    self.textInput.font = [UIFont systemFontOfSize:18];
     self.textInput.layer.cornerRadius = 3;
     self.textInput.layer.masksToBounds = YES;
     self.textInput.returnKeyType = UIReturnKeySend;
@@ -166,41 +166,21 @@ static InputToolbar* _instance = nil;
         [self.textInput deleteBackward];
         return;
     }
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.textInput.attributedText];
-    if ([text isKindOfClass:[NSString class]]) {
-        
-        NSString *string;
-        if (self.textInput.text.length == 0) {
-            string = @"";
-        } else {
-            string = self.textInput.text;
-        }
-//        attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+    if (![text isKindOfClass:[UIImage class]]) {
+        [self.textInput replaceRange:self.textInput.selectedTextRange withText:(NSString *)text];
     } else {
         NSTextAttachment *textAttachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil] ;
         textAttachment.image = (UIImage *)text; //要添加的图片
-        textAttachment.bounds = CGRectMake(0, 0, 25, 25);
-
-        NSAttributedString *textAttachmentString = [NSAttributedString attributedStringWithAttachment:textAttachment];
-        [attributedString insertAttributedString:textAttachmentString atIndex:attributedString.length];
+        textAttachment.bounds = CGRectMake(0, - 5, self.textInput.font.lineHeight + 1, self.textInput.font.lineHeight + 1);
+        NSAttributedString *imageText = [NSAttributedString attributedStringWithAttachment:textAttachment];
+        
+        NSMutableAttributedString *strM = [[NSMutableAttributedString alloc] initWithAttributedString:self.textInput.attributedText];
+        [strM replaceCharactersInRange:self.textInput.selectedRange withAttributedString:imageText];
+        [strM addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:18] range:NSMakeRange(self.textInput.selectedRange.location, 1)];
+        self.textInput.attributedText = strM;
+        self.textInput.selectedRange = NSMakeRange(self.textInput.selectedRange.location + 1,0);
+        [self.textInput.delegate textViewDidChange:self.textInput];
     }
-    
-    
-
-    
-    self.textInput.attributedText = attributedString;
-    _textInputHeight = ceilf([self.textInput sizeThatFits:CGSizeMake(self.textInput.bounds.size.width, MAXFLOAT)].height);
-    self.textInput.scrollEnabled = _textInputHeight > _TextInputMaxHeight && _TextInputMaxHeight > 0;
-    if (self.textInput.scrollEnabled) {
-        self.textInput.height = 5 + _TextInputMaxHeight;
-        self.y = SCREEN_HEIGHT - _keyboardHeight - _TextInputMaxHeight - 5 - 8;
-        self.height = _TextInputMaxHeight + 15;
-    } else {
-        self.textInput.height = _textInputHeight;
-        self.y = SCREEN_HEIGHT - _keyboardHeight - _textInputHeight - 5 - 8;
-        self.height = _textInputHeight + 15;
-    }
-    self.leftButton.y = self.emojiButton.y = self.moreButton.y = self.height - self.leftButton.height - 12;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
