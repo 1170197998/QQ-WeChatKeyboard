@@ -1,5 +1,5 @@
 //
-//  LeftButtonView.h
+//  VoiceButtonView.h
 //  KeyBoard
 //
 //  Created by ShaoFeng on 16/8/18.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LeftButtonView : UIView
+@interface VoiceButtonView : UIView
 
 @end

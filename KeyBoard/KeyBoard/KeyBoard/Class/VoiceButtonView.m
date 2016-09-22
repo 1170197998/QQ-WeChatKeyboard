@@ -9,10 +9,10 @@
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
-#import "LeftButtonView.h"
+#import "VoiceButtonView.h"
 #import "UIView+Extension.h"
 #import <AVFoundation/AVFoundation.h>
-@interface LeftButtonView ()<AVAudioRecorderDelegate>
+@interface VoiceButtonView ()<AVAudioRecorderDelegate>
 {
     AVAudioRecorder *audioRecorder;
 }
@@ -21,7 +21,7 @@
 @property (nonatomic,strong)UIView *rightView;
 @end
 
-@implementation LeftButtonView
+@implementation VoiceButtonView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

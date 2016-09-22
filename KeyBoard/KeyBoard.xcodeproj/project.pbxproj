@@ -142,7 +142,7 @@
 		9AB006C71D6C4BBD007A0EB5 /* EmojiButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB006BB1D6C4BBD007A0EB5 /* EmojiButtonView.m */; };
 		9AB006C81D6C4BBD007A0EB5 /* EmojiCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB006BD1D6C4BBD007A0EB5 /* EmojiCollectionViewCell.m */; };
 		9AB006C91D6C4BBD007A0EB5 /* InputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB006BF1D6C4BBD007A0EB5 /* InputToolbar.m */; };
-		9AB006CA1D6C4BBD007A0EB5 /* LeftButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB006C11D6C4BBD007A0EB5 /* LeftButtonView.m */; };
+		9AB006CA1D6C4BBD007A0EB5 /* VoiceButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB006C11D6C4BBD007A0EB5 /* VoiceButtonView.m */; };
 		9AB006CB1D6C4BBD007A0EB5 /* MoreButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB006C31D6C4BBD007A0EB5 /* MoreButtonView.m */; };
 		9AB006CC1D6C4BBD007A0EB5 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AB006C51D6C4BBD007A0EB5 /* UIView+Extension.m */; };
 		9AB006CE1D6C530C007A0EB5 /* mianView.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AB006CD1D6C530C007A0EB5 /* mianView.png */; };
@@ -295,8 +295,8 @@
 		9AB006BD1D6C4BBD007A0EB5 /* EmojiCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmojiCollectionViewCell.m; sourceTree = "<group>"; };
 		9AB006BE1D6C4BBD007A0EB5 /* InputToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputToolbar.h; sourceTree = "<group>"; };
 		9AB006BF1D6C4BBD007A0EB5 /* InputToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputToolbar.m; sourceTree = "<group>"; };
-		9AB006C01D6C4BBD007A0EB5 /* LeftButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftButtonView.h; sourceTree = "<group>"; };
-		9AB006C11D6C4BBD007A0EB5 /* LeftButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftButtonView.m; sourceTree = "<group>"; };
+		9AB006C01D6C4BBD007A0EB5 /* VoiceButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceButtonView.h; sourceTree = "<group>"; };
+		9AB006C11D6C4BBD007A0EB5 /* VoiceButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceButtonView.m; sourceTree = "<group>"; };
 		9AB006C21D6C4BBD007A0EB5 /* MoreButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreButtonView.h; sourceTree = "<group>"; };
 		9AB006C31D6C4BBD007A0EB5 /* MoreButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreButtonView.m; sourceTree = "<group>"; };
 		9AB006C41D6C4BBD007A0EB5 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -510,8 +510,8 @@
 			children = (
 				9AB006BE1D6C4BBD007A0EB5 /* InputToolbar.h */,
 				9AB006BF1D6C4BBD007A0EB5 /* InputToolbar.m */,
-				9AB006C01D6C4BBD007A0EB5 /* LeftButtonView.h */,
-				9AB006C11D6C4BBD007A0EB5 /* LeftButtonView.m */,
+				9AB006C01D6C4BBD007A0EB5 /* VoiceButtonView.h */,
+				9AB006C11D6C4BBD007A0EB5 /* VoiceButtonView.m */,
 				9AB006BA1D6C4BBD007A0EB5 /* EmojiButtonView.h */,
 				9AB006BB1D6C4BBD007A0EB5 /* EmojiButtonView.m */,
 				9AB006B81D6C4BBD007A0EB5 /* CollectionViewFlowLayout.h */,
@@ -734,7 +734,7 @@
 				9A3770DB1D7D2C620093E6C3 /* UITextView+Category.m in Sources */,
 				9A3FCB8C1D6548BF0058D4A4 /* PushViewController.m in Sources */,
 				9A171F2B1D64796700D48B84 /* main.m in Sources */,
-				9AB006CA1D6C4BBD007A0EB5 /* LeftButtonView.m in Sources */,
+				9AB006CA1D6C4BBD007A0EB5 /* VoiceButtonView.m in Sources */,
 				9AB006C61D6C4BBD007A0EB5 /* CollectionViewFlowLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

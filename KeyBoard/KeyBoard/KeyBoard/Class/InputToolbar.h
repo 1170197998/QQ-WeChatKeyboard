@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MoreButtonView.h"
-#import "LeftButtonView.h"
+#import "VoiceButtonView.h"
 #import "EmojiButtonView.h"
 #import "UIView+Extension.h"
 

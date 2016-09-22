@@ -19,12 +19,12 @@
 @property (nonatomic, assign)NSInteger keyboardHeight;
 @property (nonatomic, assign)BOOL showKeyboardButton;
 
-@property (nonatomic,strong)UIButton *leftButton;
+@property (nonatomic,strong)UIButton *voiceButton;
 @property (nonatomic,strong)UITextView *textInput;
 @property (nonatomic,strong)UIButton *emojiButton;
 @property (nonatomic,strong)UIButton *moreButton;
 
-@property (nonatomic,strong)LeftButtonView *leftButtonView;
+@property (nonatomic,strong)VoiceButtonView *voiceButtonView;
 @property (nonatomic,strong)EmojiButtonView *emojiButtonView;
 @property (nonatomic,strong)MoreButtonView *moreButtonView;
 
@@ -32,15 +32,15 @@
 
 @implementation InputToolbar
 
-- (LeftButtonView *)leftButtonView
+- (VoiceButtonView *)voiceButtonView
 {
-    if (!_leftButtonView) {
-        self.leftButtonView = [[LeftButtonView alloc] init];
-        self.leftButtonView.width = self.width;
-        self.leftButtonView.height = customKeyboardHeight;
+    if (!_voiceButtonView) {
+        self.voiceButtonView = [[VoiceButtonView alloc] init];
+        self.voiceButtonView.width = self.width;
+        self.voiceButtonView.height = customKeyboardHeight;
         _keyboardHeight = customKeyboardHeight;
     }
-    return _leftButtonView;
+    return _voiceButtonView;
 }
 
 - (EmojiButtonView *)emojiButtonView
@@ -116,11 +116,11 @@ static InputToolbar* _instance = nil;
 
 - (void)layoutUI
 {
-    self.leftButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 9, 30, 30)];
-    [self.leftButton setImage:[UIImage imageNamed:@"liaotian_ic_yuyin_nor"] forState:UIControlStateNormal];
-    [self.leftButton setImage:[UIImage imageNamed:@"liaotian_ic_press"] forState:UIControlStateHighlighted];
-    [self.leftButton addTarget:self action:@selector(clickLeftButton) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.leftButton];
+    self.voiceButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 9, 30, 30)];
+    [self.voiceButton setImage:[UIImage imageNamed:@"liaotian_ic_yuyin_nor"] forState:UIControlStateNormal];
+    [self.voiceButton setImage:[UIImage imageNamed:@"liaotian_ic_press"] forState:UIControlStateHighlighted];
+    [self.voiceButton addTarget:self action:@selector(clickVoiceButton) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:self.voiceButton];
     
     self.textInput = [[UITextView alloc] initWithFrame:CGRectMake(50, 5, SCREEN_WIDTH - 150, 36)];
     self.textInput.font = [UIFont systemFontOfSize:18];
@@ -157,7 +157,7 @@ static InputToolbar* _instance = nil;
         self.y = SCREEN_HEIGHT - _keyboardHeight - _textInputHeight - 5 - 8;
         self.height = _textInputHeight + 15;
     }
-    self.leftButton.y = self.emojiButton.y = self.moreButton.y = self.height - self.leftButton.height - 12;
+    self.voiceButton.y = self.emojiButton.y = self.moreButton.y = self.height - self.voiceButton.height - 12;
 }
 
 - (void)emojiButtonView:(EmojiButtonView *)emojiButtonView emojiText:(NSObject *)text
@@ -193,7 +193,7 @@ static InputToolbar* _instance = nil;
         self.textInput.height = 36;
         self.height = InputToolbarHeight;
         self.y = SCREEN_HEIGHT - _keyboardHeight - InputToolbarHeight;
-        self.leftButton.y = self.emojiButton.y = self.moreButton.y = 9;
+        self.voiceButton.y = self.emojiButton.y = self.moreButton.y = 9;
         return NO;
     }
     return YES;
@@ -208,12 +208,12 @@ static InputToolbar* _instance = nil;
     self.textInput.height = 36;
     self.height = InputToolbarHeight;
     self.y = SCREEN_HEIGHT - _keyboardHeight - InputToolbarHeight;
-    self.leftButton.y = self.emojiButton.y = self.moreButton.y = 9;
+    self.voiceButton.y = self.emojiButton.y = self.moreButton.y = 9;
 }
 
-- (void)clickLeftButton
+- (void)clickVoiceButton
 {
-    [self switchToKeyboard:self.leftButtonView];
+    [self switchToKeyboard:self.voiceButtonView];
 }
 
 - (void)clickEmojiButton
