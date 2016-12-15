@@ -10,8 +10,11 @@
 
 #import "PushViewController.h"
 #import "InputToolbar.h"
-@interface PushViewController ()<MoreButtonViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+#import "UIView+Extension.h"
+
+@interface PushViewController ()<MoreButtonViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,InputToolbarDelegate>
 @property (nonatomic,strong)InputToolbar *inputToolbar;
+@property (nonatomic,assign)CGFloat inputToolbarY;
 @end
 
 @implementation PushViewController
@@ -19,17 +22,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.inputToolbar = [[InputToolbar alloc] init];
     self.inputToolbar = [InputToolbar shareInstance];
-
+    [self.view addSubview:self.inputToolbar];
     self.inputToolbar.textViewMaxVisibleLine = 4;
     self.inputToolbar.width = self.view.width;
-    self.inputToolbar.height = 49;
+    self.inputToolbar.height = 48;
     self.inputToolbar.y = self.view.height - self.inputToolbar.height;
+    self.inputToolbar.delegate = self;
     [self.inputToolbar setMorebuttonViewDelegate:self];
-    self.inputToolbar.sendContent = ^(NSString *content){
+    
+    self.inputToolbar.sendContent = ^(NSObject *content){
         NSLog(@"发射成功☀️:---%@",content);
     };
+    
+    self.inputToolbar.inputToolbarFrameChange = ^(CGFloat height,CGFloat orignY){
+        _inputToolbarY = orignY;
+    };
+
     [self.view addSubview:self.inputToolbar];
 }
 
@@ -60,6 +69,11 @@
         default:
             break;
     }
+}
+
+- (void)inputToolbar:(InputToolbar *)inputToolbar orignY:(CGFloat)orignY
+{
+    _inputToolbarY = orignY;
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<NSString *,id> *)info

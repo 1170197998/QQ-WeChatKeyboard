@@ -23,7 +23,7 @@
 
 - (void)setupUI
 {
-    self.button = [[UIButton alloc] initWithFrame:CGRectInset(self.contentView.bounds, 0, 0)];
+    self.button = [[UIButton alloc] init];
     self.button.userInteractionEnabled = false;
     [self.contentView addSubview:self.button];
 }
@@ -31,27 +31,30 @@
 - (void)setString:(NSString *)string
 {
     if ([string isEqual: deleteButtonId]) {
+        [self.button setTitle:nil forState:UIControlStateNormal];
         [self.button setImage:[UIImage imageNamed:@"chat_ic_delete_nor"] forState:UIControlStateNormal];
         [self.button setImage:[UIImage imageNamed:@"chat_ic_delete_press"] forState:UIControlStateHighlighted];
-        [self.button setFrame:CGRectMake(7, 3, self.contentView.frame.size.width - 17, self.contentView.frame.size.height - 6)];
-    } else {
+        [self.button setFrame:CGRectMake(7, 3, self.contentView.frame.size.width - 10, self.contentView.frame.size.height - 6)];
+     } else {
         [self.button setImage:nil forState:UIControlStateNormal];
         [self.button setImage:nil forState:UIControlStateHighlighted];
         [self.button setTitle:string forState:UIControlStateNormal];
+         self.button.frame = CGRectInset(self.contentView.bounds, 0, 0);
     }
 }
 
 - (void)setImage:(UIImage *)image
 {
+    self.button.frame = CGRectInset(self.contentView.bounds, 0, 0);
     [self.button setTitle:nil forState:UIControlStateNormal];
     if (image) {
         [self.button setImage:image forState:UIControlStateNormal];
         [self.button setImage:image forState:UIControlStateHighlighted];
-        [self.button setFrame:CGRectMake(7, 3, self.contentView.frame.size.width - 17, self.contentView.frame.size.height - 6)];
     } else {
         [self.button setImage:nil forState:UIControlStateNormal];
         [self.button setImage:nil forState:UIControlStateHighlighted];
     }
 }
+
 
 @end

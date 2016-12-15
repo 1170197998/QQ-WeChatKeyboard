@@ -10,8 +10,10 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define customKeyboardHeight 200
 #define InputToolbarHeight 49
+#define NavigationHeight 64
 
 #import "InputToolbar.h"
+#import "UIView+Extension.h"
 
 @interface InputToolbar ()<UITextViewDelegate,EmojiButtonViewDelegate>
 @property (nonatomic, assign)CGFloat textInputHeight;
@@ -32,7 +34,7 @@
 
 @implementation InputToolbar
 
-- (VoiceButtonView *)voiceButtonView
+- (VoiceButtonView *)leftButtonView
 {
     if (!_voiceButtonView) {
         self.voiceButtonView = [[VoiceButtonView alloc] init];
@@ -101,28 +103,38 @@ static InputToolbar* _instance = nil;
     CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     _keyboardHeight = keyboardFrame.size.height;
     CGFloat duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    [UIView animateWithDuration:duration animations:^{
-        self.y = keyboardFrame.origin.y - self.height;
-    }];
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:duration];
+    [UIView setAnimationCurve:7];
+    self.y = keyboardFrame.origin.y - self.height;
+    [UIView commitAnimations];
+    _inputToolbarFrameChange(self.height,self.y);
+    self.keyboardIsVisiable = YES;
 }
 
 - (void)keyboardWillHidden:(NSNotification *)notification
 {
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     [UIView animateWithDuration:duration animations:^{
-        self.y = self.superview.height - self.height;
+        self.y = keyboardFrame.origin.y - self.height;
     }];
+    _inputToolbarFrameChange(self.height,self.y);
+    //NSLog(@"%lf  %lf",self.height,self.y);
+    self.keyboardIsVisiable = NO;
+    [self setShowKeyboardButton:NO];
 }
 
 - (void)layoutUI
 {
-    self.voiceButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 9, 30, 30)];
+    self.voiceButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 9, 30, 30)];
     [self.voiceButton setImage:[UIImage imageNamed:@"liaotian_ic_yuyin_nor"] forState:UIControlStateNormal];
     [self.voiceButton setImage:[UIImage imageNamed:@"liaotian_ic_press"] forState:UIControlStateHighlighted];
     [self.voiceButton addTarget:self action:@selector(clickVoiceButton) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.voiceButton];
     
-    self.textInput = [[UITextView alloc] initWithFrame:CGRectMake(50, 5, SCREEN_WIDTH - 150, 36)];
+    self.textInput = [[UITextView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.voiceButton.frame) + 5, 5, SCREEN_WIDTH - 115, 36)];
     self.textInput.font = [UIFont systemFontOfSize:18];
     self.textInput.layer.cornerRadius = 3;
     self.textInput.layer.masksToBounds = YES;
@@ -131,13 +143,13 @@ static InputToolbar* _instance = nil;
     self.textInput.delegate = self;
     [self addSubview:self.textInput];
     
-    self.emojiButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.textInput.frame) + 10, 9, 30, 30)];
+    self.emojiButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.textInput.frame) + 5, 9, 30, 30)];
     [self.emojiButton setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_nor"] forState:UIControlStateNormal];
     [self.emojiButton setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_press"] forState:UIControlStateHighlighted];
     [self.emojiButton addTarget:self action:@selector(clickEmojiButton) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.emojiButton];
     
-    self.moreButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.emojiButton.frame) + 10, 9, 30, 30)];
+    self.moreButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.emojiButton.frame) + 5, 9, 30, 30)];
     [self.moreButton setImage:[UIImage imageNamed:@"liaotian_ic_gengduo_nor"] forState:UIControlStateNormal];
     [self.moreButton setImage:[UIImage imageNamed:@"liaotian_ic_gengduo_press"] forState:UIControlStateHighlighted];
     [self.moreButton addTarget:self action:@selector(clickMoreButton) forControlEvents:UIControlEventTouchUpInside];
@@ -158,6 +170,9 @@ static InputToolbar* _instance = nil;
         self.height = _textInputHeight + 15;
     }
     self.voiceButton.y = self.emojiButton.y = self.moreButton.y = self.height - self.voiceButton.height - 12;
+    if ([_delegate respondsToSelector:@selector(inputToolbar:orignY:)]) {
+        [_delegate inputToolbar:self orignY:self.y];
+    }
 }
 
 - (void)emojiButtonView:(EmojiButtonView *)emojiButtonView emojiText:(NSObject *)text
@@ -170,8 +185,8 @@ static InputToolbar* _instance = nil;
         [self.textInput replaceRange:self.textInput.selectedTextRange withText:(NSString *)text];
     } else {
         NSTextAttachment *textAttachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil] ;
-        textAttachment.image = (UIImage *)text; //要添加的图片
-        textAttachment.bounds = CGRectMake(0, - 5, self.textInput.font.lineHeight + 1, self.textInput.font.lineHeight + 1);
+        textAttachment.image = (UIImage *)text;
+        textAttachment.bounds = CGRectMake(0, - 5, self.textInput.font.lineHeight + 2, self.textInput.font.lineHeight + 2);
         NSAttributedString *imageText = [NSAttributedString attributedStringWithAttachment:textAttachment];
         
         NSMutableAttributedString *strM = [[NSMutableAttributedString alloc] initWithAttributedString:self.textInput.attributedText];
@@ -187,12 +202,13 @@ static InputToolbar* _instance = nil;
 {
     if ([text isEqualToString:@"\n"]) {
         if (_sendContent) {
-            _sendContent(self.textInput.text);
+            _sendContent(self.textInput.attributedText);
+            self.y = SCREEN_HEIGHT - _keyboardHeight - InputToolbarHeight;
+            _inputToolbarFrameChange(self.height,self.y);
         }
         textView.text = nil;
         self.textInput.height = 36;
         self.height = InputToolbarHeight;
-        self.y = SCREEN_HEIGHT - _keyboardHeight - InputToolbarHeight;
         self.voiceButton.y = self.emojiButton.y = self.moreButton.y = 9;
         return NO;
     }
@@ -202,38 +218,38 @@ static InputToolbar* _instance = nil;
 - (void)emojiButtonView:(EmojiButtonView *)emojiButtonView sendButtonClick:(UIButton *)sender
 {
     if (_sendContent) {
-        _sendContent(self.textInput.text);
+        _sendContent(self.textInput.attributedText);
+        self.y = SCREEN_HEIGHT - _keyboardHeight - InputToolbarHeight;
+        _inputToolbarFrameChange(self.height,self.y);
     }
     self.textInput.text = nil;
     self.textInput.height = 36;
     self.height = InputToolbarHeight;
-    self.y = SCREEN_HEIGHT - _keyboardHeight - InputToolbarHeight;
     self.voiceButton.y = self.emojiButton.y = self.moreButton.y = 9;
 }
 
 - (void)clickVoiceButton
 {
-    [self switchToKeyboard:self.voiceButtonView];
+    [self switchToKeyboard:self.leftButtonView];
 }
 
 - (void)clickEmojiButton
 {
-    if (self.textInput.inputView == nil) {
-        self.showKeyboardButton = YES;
+    if (self.textInput.inputView == nil || !self.keyboardIsVisiable) {
         self.textInput.inputView = self.emojiButtonView;
+        self.showKeyboardButton = YES;
     } else {
         
         if (self.textInput.inputView != self.emojiButtonView) {
             self.textInput.inputView = self.emojiButtonView;
+            self.showKeyboardButton = YES;
         } else {
             self.textInput.inputView = nil;
             self.showKeyboardButton = NO;
         }
     }
     [self.textInput endEditing:YES];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0008 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.textInput becomeFirstResponder];
-    });
+    [self.textInput becomeFirstResponder];
 }
 
 - (void)clickMoreButton
@@ -243,7 +259,7 @@ static InputToolbar* _instance = nil;
 
 - (void)switchToKeyboard:(UIView *)keyboard
 {
-    if (self.textInput.inputView == nil) {
+    if (self.textInput.inputView == nil || !self.keyboardIsVisiable) {
         self.textInput.inputView = keyboard;
     } else {
         //优先弹出非键盘keyboard
@@ -252,11 +268,10 @@ static InputToolbar* _instance = nil;
         } else {
             self.textInput.inputView = nil;
         }
+        self.showKeyboardButton = NO;
     }
     [self.textInput endEditing:YES];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0008 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.textInput becomeFirstResponder];
-    });
+    [self.textInput becomeFirstResponder];
 }
 
 - (void)setShowKeyboardButton:(BOOL)showKeyboardButton
@@ -296,6 +311,19 @@ static InputToolbar* _instance = nil;
 {
     _textViewMaxVisibleLine = textViewMaxVisibleLine;
     _TextInputMaxHeight = ceil(self.textInput.font.lineHeight * (textViewMaxVisibleLine - 1) + self.textInput.textContainerInset.top + self.textInput.textContainerInset.bottom);
+}
+
+- (void)clearInputToolbarContent
+{
+    self.textInput.text = nil;
+}
+
+- (void)resetInputToolbar
+{
+    self.textInput.text = nil;
+    self.textInput.height = 36;
+    self.height = InputToolbarHeight;
+    self.voiceButton.y = self.emojiButton.y = self.moreButton.y = 9;
 }
 
 @end

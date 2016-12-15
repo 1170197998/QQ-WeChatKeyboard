@@ -14,6 +14,7 @@
 #import "EmojiCollectionViewCell.h"
 #import "UIView+Extension.h"
 #import "EmotionImages.h"
+
 @interface EmojiButtonView ()<UICollectionViewDataSource,UICollectionViewDelegate>
 @property (nonatomic,strong)UIView *emojiFooterView;
 @property (nonatomic,strong)UIScrollView *emojiFooterScrollView;
@@ -25,7 +26,6 @@
 @property (nonatomic,strong)CollectionViewFlowLayout *layout;
 @property (nonatomic,strong)NSMutableArray *defaultEmoticons;
 @property (nonatomic,strong)NSArray *emoticonImages;
-
 @end
 
 @implementation EmojiButtonView
@@ -48,7 +48,7 @@
         }
         
         [_defaultEmoticons addObjectsFromArray:[EmotionImages shareEmotinImages].images];
-        
+
         for (NSInteger i = 0;i < _defaultEmoticons.count;i ++) {
             if (i == 20 || i == 41 || i == 62 || i == 83 || i == 104 || i == 125 || i == 146 || i == 167) {
                 [_defaultEmoticons insertObject:deleteButtonId atIndex:i];
@@ -98,14 +98,14 @@
     [self.emojiButotn addTarget:self action:@selector(clickEmojiButton) forControlEvents:UIControlEventTouchUpInside];
     [self.emojiFooterScrollView addSubview:self.emojiButotn];
     self.emojiButotn.selected = YES;
-
+    
     self.emojiImageButotn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 6, 0, SCREEN_WIDTH / 6, 40)];
     [self.emojiImageButotn setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_nor"] forState:UIControlStateNormal];
     [self.emojiImageButotn setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_press"] forState:UIControlStateSelected];
     [self.emojiImageButotn addTarget:self action:@selector(clickEmojiImageButton) forControlEvents:UIControlEventTouchUpInside];
     [self.emojiFooterScrollView addSubview:self.emojiImageButotn];
     self.emojiImageButotn.selected = NO;
-
+    
     self.layout = [[CollectionViewFlowLayout alloc] init];
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 130) collectionViewLayout:self.layout];
@@ -118,6 +118,7 @@
     self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 140, 0, 10)];
     self.pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     self.pageControl.pageIndicatorTintColor = [UIColor grayColor];
+    self.pageControl.userInteractionEnabled = NO;
     
     self.pageControl.numberOfPages = (self.defaultEmoticons.count - self.emoticonImages.count) / 21;
     [self addSubview:self.pageControl];
@@ -131,15 +132,14 @@
             self.pageControl.currentPage = ((scrollView.contentOffset.x - SCREEN_WIDTH * ((self.defaultEmoticons.count - self.emoticonImages.count) / 21)) / SCREEN_WIDTH);
             self.emojiButotn.selected = NO;
             self.emojiImageButotn.selected = YES;
-
+            
         } else {
             self.pageControl.numberOfPages = (self.defaultEmoticons.count - self.emoticonImages.count) / 21;
             self.pageControl.currentPage = (scrollView.contentOffset.x / SCREEN_WIDTH);
             self.emojiButotn.selected = YES;
             self.emojiImageButotn.selected = NO;
         }
-    }
-}
+    }}
 
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -154,13 +154,11 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     EmojiCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
-    
     if ([self.defaultEmoticons[indexPath.row] isKindOfClass:[UIImage class]]) {
         cell.image = self.defaultEmoticons[indexPath.row];
     } else {
         cell.string = self.defaultEmoticons[indexPath.row];
     }
-    
     return cell;
 }
 

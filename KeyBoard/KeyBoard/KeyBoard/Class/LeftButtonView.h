@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VoiceButtonView : UIView
+@interface LeftButtonView : UIView
 
 @end

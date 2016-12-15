@@ -10,9 +10,20 @@
 #import "MoreButtonView.h"
 #import "VoiceButtonView.h"
 #import "EmojiButtonView.h"
-#import "UIView+Extension.h"
+@class InputToolbar;
+@protocol InputToolbarDelegate <NSObject>
+- (void)inputToolbar:(InputToolbar *)inputToolbar orignY:(CGFloat )orignY;
+@end
 
 @interface InputToolbar : UIView
+
+@property (nonatomic,weak) id<InputToolbarDelegate>delegate;
++(instancetype) shareInstance;
+
+/**
+ *  当前键盘是否可见
+ */
+@property (nonatomic,assign)BOOL keyboardIsVisiable;
 
 /**
  *  设置第一响应
@@ -27,14 +38,25 @@
 /**
  *  点击发送后要发送的文本
  */
-@property (nonatomic,strong)void(^sendContent)(NSString *content);
+@property (nonatomic,strong)void(^sendContent)(NSObject *content);
+
+/**
+ *  InputToolbar所占高度
+ */
+@property (nonatomic,strong)void(^inputToolbarFrameChange)(CGFloat height,CGFloat orignY);
 
 /**
  *  添加moreButtonView代理
  */
 - (void)setMorebuttonViewDelegate:(id)delegate;
 
-+(instancetype) shareInstance;
+/**
+ *  清空inputToolbar内容
+ */
+- (void)clearInputToolbarContent;
 
-
+/**
+ *  重置inputToolbar
+ */
+- (void)resetInputToolbar;
 @end
