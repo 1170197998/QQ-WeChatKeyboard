@@ -4,13 +4,13 @@
 ###2.微信的语音发送实现网上已经很多了,在这里打算做一个QQ语音发送的效果,此模块正在开发中....
 
 ##**DEMO效果**
-![Mou icon](http://g.recordit.co/xHPyiWW5sL.gif)
+![Mou icon](http://g.recordit.co/1g8ZwxvWDn.gif)
 ##**类的介绍**
 ![这里写图片描述](http://img.blog.csdn.net/20160825084343802)
 
 ```
 InputToolbar:键盘工具条
-LeftButtonView:语音模块视图
+VoiceButtonView:语音模块视图
 EmojiButtonView:Emoji模块视图
 MoreButtonView:加号模块视图(相册,相机,文件,位置...)
 CollectionViewFlowLayout:表情键盘CollectionView布局
@@ -29,25 +29,42 @@ UIView+Extension:UIView工具类
     @property (nonatomic,strong)InputToolbar *inputToolbar;
 创建inputToolbar
     self.inputToolbar = [InputToolbar shareInstance];
+    [self.view addSubview:self.inputToolbar];
+
 输入框最大显示行数    
     self.inputToolbar.textViewMaxVisibleLine = 4;
 布局inputToolbar    
     self.inputToolbar.width = self.view.width;
     self.inputToolbar.height = 49;
-    self.inputToolbar.y = self.view.height - self.inputToolbar.height - 64;
+    self.inputToolbar.y = self.view.height - self.inputToolbar.height;
 设定代理
     self.inputToolbar.delegate = self;
     [self.inputToolbar setMorebuttonViewDelegate:self];
 点击发送按钮回调,顺便传回输入内容    
-    self.inputToolbar.sendContent = ^(NSString *content){
+    __weak typeof(self) weakSelf = self;
+    self.inputToolbar.sendContent = ^(NSObject *content){
+        
         NSLog(@"发射成功☀️:---%@",content);
+
+        if ([content isKindOfClass:[NSTextAttachment class]]) {
+
+            [weakSelf.textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:(NSTextAttachment *)content] atIndex:weakSelf.textView.selectedRange.location];
+            
+        } else {
+            
+            weakSelf.textView.text = ((NSAttributedString *)content).string;
+        }
     };
-    [self.view addSubview:self.inputToolbar];
+    
+    self.inputToolbar.inputToolbarFrameChange = ^(CGFloat height,CGFloat orignY){
+        _inputToolbarY = orignY;
+    };
 
 实现协议方法
 //在输入的过程中会调用此方法,随着输入框的增高进而调整界面布局
 - (void)inputToolbar:(InputToolbar *)inputToolbar orignY:(CGFloat)orignY
 {
+	 _inputToolbarY = orignY
 	 [self.tableView setContentOffset:CGPointMake(0, _tableView.contentSize.height -     (0 + orignY + 0)) animated:NO];
 }
 

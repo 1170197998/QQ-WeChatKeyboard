@@ -22,7 +22,6 @@
 		9A8DF1161E00E7E600CE9F21 /* EmojiCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DF08B1E00E7E600CE9F21 /* EmojiCollectionViewCell.m */; };
 		9A8DF1171E00E7E600CE9F21 /* EmotionImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DF08D1E00E7E600CE9F21 /* EmotionImages.m */; };
 		9A8DF1181E00E7E600CE9F21 /* InputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DF08F1E00E7E600CE9F21 /* InputToolbar.m */; };
-		9A8DF1191E00E7E600CE9F21 /* LeftButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DF0911E00E7E600CE9F21 /* LeftButtonView.m */; };
 		9A8DF11A1E00E7E600CE9F21 /* MoreButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DF0931E00E7E600CE9F21 /* MoreButtonView.m */; };
 		9A8DF11B1E00E7E600CE9F21 /* UITextView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DF0951E00E7E600CE9F21 /* UITextView+Category.m */; };
 		9A8DF11C1E00E7E600CE9F21 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DF0971E00E7E600CE9F21 /* UIView+Extension.m */; };
@@ -175,8 +174,6 @@
 		9A8DF08D1E00E7E600CE9F21 /* EmotionImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmotionImages.m; sourceTree = "<group>"; };
 		9A8DF08E1E00E7E600CE9F21 /* InputToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputToolbar.h; sourceTree = "<group>"; };
 		9A8DF08F1E00E7E600CE9F21 /* InputToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputToolbar.m; sourceTree = "<group>"; };
-		9A8DF0901E00E7E600CE9F21 /* LeftButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftButtonView.h; sourceTree = "<group>"; };
-		9A8DF0911E00E7E600CE9F21 /* LeftButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftButtonView.m; sourceTree = "<group>"; };
 		9A8DF0921E00E7E600CE9F21 /* MoreButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreButtonView.h; sourceTree = "<group>"; };
 		9A8DF0931E00E7E600CE9F21 /* MoreButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreButtonView.m; sourceTree = "<group>"; };
 		9A8DF0941E00E7E600CE9F21 /* UITextView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Category.h"; sourceTree = "<group>"; };
@@ -386,8 +383,6 @@
 				9A8DF08D1E00E7E600CE9F21 /* EmotionImages.m */,
 				9A8DF08E1E00E7E600CE9F21 /* InputToolbar.h */,
 				9A8DF08F1E00E7E600CE9F21 /* InputToolbar.m */,
-				9A8DF0901E00E7E600CE9F21 /* LeftButtonView.h */,
-				9A8DF0911E00E7E600CE9F21 /* LeftButtonView.m */,
 				9A8DF0921E00E7E600CE9F21 /* MoreButtonView.h */,
 				9A8DF0931E00E7E600CE9F21 /* MoreButtonView.m */,
 				9A8DF0941E00E7E600CE9F21 /* UITextView+Category.h */,
@@ -737,7 +732,6 @@
 				9A8DF1141E00E7E600CE9F21 /* CollectionViewFlowLayout.m in Sources */,
 				9A8DF1171E00E7E600CE9F21 /* EmotionImages.m in Sources */,
 				9A8DF11A1E00E7E600CE9F21 /* MoreButtonView.m in Sources */,
-				9A8DF1191E00E7E600CE9F21 /* LeftButtonView.m in Sources */,
 				9A8DF1161E00E7E600CE9F21 /* EmojiCollectionViewCell.m in Sources */,
 				9A3FCB8C1D6548BF0058D4A4 /* PushViewController.m in Sources */,
 				9A8DF11D1E00E7E600CE9F21 /* VoiceButtonView.m in Sources */,

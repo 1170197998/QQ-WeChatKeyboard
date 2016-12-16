@@ -1,5 +1,5 @@
 //
-//  LeftButtonView.h
+//  VoiceButtonView.h
 //  KeyBoard
 //
 //  Created by ShaoFeng on 16/8/18.

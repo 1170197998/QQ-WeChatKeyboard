@@ -16,7 +16,6 @@
 @property (nonatomic,strong)InputToolbar *inputToolbar;
 @property (nonatomic,assign)CGFloat inputToolbarY;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
-    
 @end
 
 @implementation PushViewController
@@ -28,22 +27,29 @@
     [self.view addSubview:self.inputToolbar];
     self.inputToolbar.textViewMaxVisibleLine = 4;
     self.inputToolbar.width = self.view.width;
-    self.inputToolbar.height = 48;
+    self.inputToolbar.height = 49;
     self.inputToolbar.y = self.view.height - self.inputToolbar.height;
     self.inputToolbar.delegate = self;
     [self.inputToolbar setMorebuttonViewDelegate:self];
     
     __weak typeof(self) weakSelf = self;
     self.inputToolbar.sendContent = ^(NSObject *content){
+        
         NSLog(@"发射成功☀️:---%@",content);
-        weakSelf.textView.text = ((NSAttributedString *)content).string;
+
+        if ([content isKindOfClass:[NSTextAttachment class]]) {
+
+            [weakSelf.textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:(NSTextAttachment *)content] atIndex:weakSelf.textView.selectedRange.location];
+            
+        } else {
+            
+            weakSelf.textView.text = ((NSAttributedString *)content).string;
+        }
     };
     
     self.inputToolbar.inputToolbarFrameChange = ^(CGFloat height,CGFloat orignY){
         _inputToolbarY = orignY;
     };
-
-    [self.view addSubview:self.inputToolbar];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
