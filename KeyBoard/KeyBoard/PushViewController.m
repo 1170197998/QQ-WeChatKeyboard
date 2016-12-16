@@ -15,6 +15,8 @@
 @interface PushViewController ()<MoreButtonViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,InputToolbarDelegate>
 @property (nonatomic,strong)InputToolbar *inputToolbar;
 @property (nonatomic,assign)CGFloat inputToolbarY;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+    
 @end
 
 @implementation PushViewController
@@ -31,8 +33,10 @@
     self.inputToolbar.delegate = self;
     [self.inputToolbar setMorebuttonViewDelegate:self];
     
+    __weak typeof(self) weakSelf = self;
     self.inputToolbar.sendContent = ^(NSObject *content){
         NSLog(@"发射成功☀️:---%@",content);
+        weakSelf.textView.text = ((NSAttributedString *)content).string;
     };
     
     self.inputToolbar.inputToolbarFrameChange = ^(CGFloat height,CGFloat orignY){
