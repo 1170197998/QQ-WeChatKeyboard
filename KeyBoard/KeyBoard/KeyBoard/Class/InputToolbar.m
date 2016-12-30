@@ -37,9 +37,9 @@
 - (VoiceButtonView *)leftButtonView
 {
     if (!_voiceButtonView) {
-        self.voiceButtonView = [[VoiceButtonView alloc] init];
-        self.voiceButtonView.width = self.width;
-        self.voiceButtonView.height = customKeyboardHeight;
+        _voiceButtonView = [[VoiceButtonView alloc] init];
+        _voiceButtonView.width = self.width;
+        _voiceButtonView.height = customKeyboardHeight;
         _keyboardHeight = customKeyboardHeight;
     }
     return _voiceButtonView;
@@ -48,10 +48,10 @@
 - (EmojiButtonView *)emojiButtonView
 {
     if (!_emojiButtonView) {
-        self.emojiButtonView = [[EmojiButtonView alloc] init];
-        self.emojiButtonView.delegate = self;
-        self.emojiButtonView.width = self.width;
-        self.emojiButtonView.height = customKeyboardHeight;
+        _emojiButtonView = [[EmojiButtonView alloc] init];
+        _emojiButtonView.delegate = self;
+        _emojiButtonView.width = self.width;
+        _emojiButtonView.height = customKeyboardHeight;
         _keyboardHeight = customKeyboardHeight;
     }
     return _emojiButtonView;
@@ -60,9 +60,9 @@
 - (MoreButtonView *)moreButtonView
 {
     if (!_moreButtonView) {
-        self.moreButtonView = [[MoreButtonView alloc] init];
-        self.moreButtonView.width = self.width;
-        self.moreButtonView.height = customKeyboardHeight;
+        _moreButtonView = [[MoreButtonView alloc] init];
+        _moreButtonView.width = self.width;
+        _moreButtonView.height = customKeyboardHeight;
         _keyboardHeight = customKeyboardHeight;
     }
     return _moreButtonView;
@@ -73,9 +73,18 @@ static InputToolbar* _instance = nil;
 {
     static dispatch_once_t onceToken ;
     dispatch_once(&onceToken, ^{
-        _instance = [[self alloc] init] ;
-    }) ;
+        _instance = [[InputToolbar alloc] init] ;
+    });
     
+    return _instance ;
+}
+
++ (instancetype)alloc
+{
+    static dispatch_once_t onceToken ;
+    dispatch_once(&onceToken, ^{
+        _instance = [[super alloc] init] ;
+    });
     return _instance ;
 }
 
