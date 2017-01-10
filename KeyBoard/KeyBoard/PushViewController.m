@@ -38,11 +38,8 @@
         NSLog(@"发射成功☀️:---%@",content);
 
         if ([content isKindOfClass:[NSTextAttachment class]]) {
-
             [weakSelf.textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:(NSTextAttachment *)content] atIndex:weakSelf.textView.selectedRange.location];
-            
         } else {
-            
             weakSelf.textView.text = ((NSAttributedString *)content).string;
         }
     };

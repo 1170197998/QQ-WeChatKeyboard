@@ -11,5 +11,4 @@ static NSString *const deleteButtonId = @"DeleteButtonId";
 @interface EmojiCollectionViewCell : UICollectionViewCell
 @property (nonatomic,strong)NSString *string;
 @property (nonatomic,strong)UIImage *image;
-
 @end

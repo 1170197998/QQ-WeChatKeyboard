@@ -139,7 +139,8 @@
             self.emojiButotn.selected = YES;
             self.emojiImageButotn.selected = NO;
         }
-    }}
+    }
+}
 
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -198,5 +199,3 @@
 }
 
 @end
-
-

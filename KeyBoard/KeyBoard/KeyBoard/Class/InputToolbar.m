@@ -130,7 +130,6 @@ static InputToolbar* _instance = nil;
         self.y = keyboardFrame.origin.y - self.height;
     }];
     _inputToolbarFrameChange(self.height,self.y);
-    //NSLog(@"%lf  %lf",self.height,self.y);
     self.keyboardIsVisiable = NO;
     [self setShowKeyboardButton:NO];
 }

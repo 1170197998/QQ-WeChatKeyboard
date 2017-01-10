@@ -45,7 +45,6 @@
     [self.mainView addGestureRecognizer:swipe];
     UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longpress:)];
     [self.mainView addGestureRecognizer:longpress];
-    
 }
 
 - (void)swipe:(UISwipeGestureRecognizer *)recognizer
@@ -101,7 +100,6 @@
             [audioPathList addObject:audioPath];
         }
     }
-    
 //    NSLog(@"%@",audioPathList);
 }
 
