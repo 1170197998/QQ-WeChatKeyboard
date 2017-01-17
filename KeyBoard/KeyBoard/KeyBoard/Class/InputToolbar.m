@@ -75,7 +75,6 @@ static InputToolbar* _instance = nil;
     dispatch_once(&onceToken, ^{
         _instance = [[InputToolbar alloc] init] ;
     });
-    
     return _instance ;
 }
 
@@ -181,6 +180,11 @@ static InputToolbar* _instance = nil;
     if ([_delegate respondsToSelector:@selector(inputToolbar:orignY:)]) {
         [_delegate inputToolbar:self orignY:self.y];
     }
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    self.textInput.inputView = nil;
 }
 
 - (void)emojiButtonView:(EmojiButtonView *)emojiButtonView emojiText:(NSObject *)text
