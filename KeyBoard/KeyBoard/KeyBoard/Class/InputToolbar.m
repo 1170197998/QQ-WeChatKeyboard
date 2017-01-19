@@ -176,7 +176,6 @@ static InputToolbar* _instance = nil;
         self.y = SCREEN_HEIGHT - _keyboardHeight - _textInputHeight - 5 - 8;
         self.height = _textInputHeight + 15;
     }
-    self.voiceButton.y = self.emojiButton.y = self.moreButton.y = self.height - self.voiceButton.height - 12;
     if ([_delegate respondsToSelector:@selector(inputToolbar:orignY:)]) {
         [_delegate inputToolbar:self orignY:self.y];
     }
@@ -221,7 +220,6 @@ static InputToolbar* _instance = nil;
         textView.text = nil;
         self.textInput.height = 36;
         self.height = InputToolbarHeight;
-        self.voiceButton.y = self.emojiButton.y = self.moreButton.y = 9;
         return NO;
     }
     return YES;
@@ -237,7 +235,6 @@ static InputToolbar* _instance = nil;
     self.textInput.text = nil;
     self.textInput.height = 36;
     self.height = InputToolbarHeight;
-    self.voiceButton.y = self.emojiButton.y = self.moreButton.y = 9;
 }
 
 - (void)clickVoiceButton
@@ -335,7 +332,6 @@ static InputToolbar* _instance = nil;
     self.textInput.text = nil;
     self.textInput.height = 36;
     self.height = InputToolbarHeight;
-    self.voiceButton.y = self.emojiButton.y = self.moreButton.y = 9;
 }
 
 @end

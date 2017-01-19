@@ -47,6 +47,7 @@
     self.inputToolbar.inputToolbarFrameChange = ^(CGFloat height,CGFloat orignY){
         _inputToolbarY = orignY;
     };
+    [self.inputToolbar resetInputToolbar];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
