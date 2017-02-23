@@ -37,11 +37,8 @@
         
         NSLog(@"发射成功☀️:---%@",content);
 
-        if ([content isKindOfClass:[NSTextAttachment class]]) {
-            [weakSelf.textView.textStorage insertAttributedString:[NSAttributedString attributedStringWithAttachment:(NSTextAttachment *)content] atIndex:weakSelf.textView.selectedRange.location];
-        } else {
-            weakSelf.textView.text = ((NSAttributedString *)content).string;
-        }
+            NSMutableAttributedString *strM = [[NSMutableAttributedString alloc] initWithAttributedString:(NSAttributedString *)content];
+            weakSelf.textView.attributedText = strM;
     };
     
     self.inputToolbar.inputToolbarFrameChange = ^(CGFloat height,CGFloat orignY){
