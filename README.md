@@ -1,6 +1,6 @@
 ##更多文章:http://blog.csdn.net/feng2qing?viewmode=list
 ##**前言**
-###1.由于公司项目需求,需要一个类似QQ/微信的聊天键盘,包括语音,emoji和发送图片,文件,位置,网上找了一番,要不功能不够完善,要不依赖太多,于是就这个轮子就诞生了(在使用过程中如果发现什么问题或有什么建议,还望您提出来,共同进步)
+###1.由于项目需求,需要一个类似QQ/微信的聊天键盘,包括语音,emoji和发送图片,文件,位置,网上找了一番,要不功能不够完善,要不依赖太多,于是干脆自己写一个(在使用过程中如果发现什么问题或有什么建议,还望您提出来,共同进步)
 ###2.微信的语音发送实现网上已经很多了,在这里打算做一个QQ语音发送的效果,此模块正在开发中....
 
 ##**DEMO效果**
@@ -65,7 +65,7 @@ UIView+Extension:UIView工具类
 - (void)inputToolbar:(InputToolbar *)inputToolbar orignY:(CGFloat)orignY
 {
 	 _inputToolbarY = orignY
-	 [self.tableView setContentOffset:CGPointMake(0, _tableView.contentSize.height -     (0 + orignY + 0)) animated:NO];
+	 [self.tableView setContentOffset:CGPointMake(0, _tableView.contentSize.height -  (0 + orignY + 0)) animated:NO];
 }
 
 //点击MoreButtonView中的按钮会调用此方法(根据实际需求自行增删)
@@ -85,10 +85,7 @@ UIView+Extension:UIView工具类
         {
 			//发送文件操作
         } break;
-        case MoreButtonViewButtonTypeLocation:
-        {
-            //发送位置操作
-        } break;
+		 //.........
         default:
             break;
     }
