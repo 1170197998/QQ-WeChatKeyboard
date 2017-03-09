@@ -19,7 +19,9 @@
 @property (nonatomic, assign)CGFloat textInputHeight;
 @property (nonatomic, assign)NSInteger TextInputMaxHeight;
 @property (nonatomic, assign)NSInteger keyboardHeight;
-@property (nonatomic, assign)BOOL showKeyboardButton;
+@property (nonatomic,assign)BOOL showKeyboardButton; //YES: 显示键盘图标
+@property (nonatomic,assign)BOOL showMoreViewButton; //YES: 显示显示非键盘
+@property (nonatomic,assign)BOOL showVoiceViewButton; //YES: 显示显示非键盘
 
 @property (nonatomic,strong)UIButton *voiceButton;
 @property (nonatomic,strong)UITextView *textInput;
@@ -34,7 +36,7 @@
 
 @implementation InputToolbar
 
-- (VoiceButtonView *)leftButtonView
+- (VoiceButtonView *)voiceButtonView
 {
     if (!_voiceButtonView) {
         _voiceButtonView = [[VoiceButtonView alloc] init];
@@ -239,23 +241,33 @@ static InputToolbar* _instance = nil;
 
 - (void)clickVoiceButton
 {
-    [self switchToKeyboard:self.leftButtonView];
+    self.showMoreViewButton = NO;
+    self.showKeyboardButton = NO;
+    if (self.showVoiceViewButton) {
+        [self.textInput resignFirstResponder];
+        self.textInput.inputView = nil;
+        self.showVoiceViewButton = NO;
+    } else {
+        [self.textInput resignFirstResponder];
+        self.textInput.inputView = self.voiceButtonView;
+        self.showVoiceViewButton = YES;
+    }
+    [self.textInput endEditing:YES];
+    [self.textInput becomeFirstResponder];
 }
 
 - (void)clickEmojiButton
 {
-    if (self.textInput.inputView == nil || !self.keyboardIsVisiable) {
+    self.showMoreViewButton = NO;
+    self.showVoiceViewButton = NO;
+    if (!self.showKeyboardButton) {
+        [self.textInput resignFirstResponder];
         self.textInput.inputView = self.emojiButtonView;
         self.showKeyboardButton = YES;
     } else {
-        
-        if (self.textInput.inputView != self.emojiButtonView) {
-            self.textInput.inputView = self.emojiButtonView;
-            self.showKeyboardButton = YES;
-        } else {
-            self.textInput.inputView = nil;
-            self.showKeyboardButton = NO;
-        }
+        [self.textInput resignFirstResponder];
+        self.textInput.inputView = nil;
+        self.showKeyboardButton = NO;
     }
     [self.textInput endEditing:YES];
     [self.textInput becomeFirstResponder];
@@ -263,21 +275,16 @@ static InputToolbar* _instance = nil;
 
 - (void)clickMoreButton
 {
-    [self switchToKeyboard:self.moreButtonView];
-}
-
-- (void)switchToKeyboard:(UIView *)keyboard
-{
-    if (self.textInput.inputView == nil || !self.keyboardIsVisiable) {
-        self.textInput.inputView = keyboard;
+    self.showVoiceViewButton = NO;
+    self.showKeyboardButton = NO;
+    if (self.showMoreViewButton) {
+        [self.textInput resignFirstResponder];
+        self.textInput.inputView = nil;
+        self.showMoreViewButton = NO;
     } else {
-        //优先弹出非键盘keyboard
-        if (self.textInput.inputView != keyboard) {
-            self.textInput.inputView = keyboard;
-        } else {
-            self.textInput.inputView = nil;
-        }
-        self.showKeyboardButton = NO;
+        [self.textInput resignFirstResponder];
+        self.textInput.inputView = self.moreButtonView;
+        self.showMoreViewButton = YES;
     }
     [self.textInput endEditing:YES];
     [self.textInput becomeFirstResponder];
