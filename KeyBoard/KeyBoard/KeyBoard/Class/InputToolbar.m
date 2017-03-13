@@ -243,7 +243,21 @@ static InputToolbar* _instance = nil;
 {
     //默认键盘删除键
     if ([text isEqualToString:@""]) {
-        [self.textUpload deleteBackward];
+        //确定光标位置并且删除
+        NSInteger location = self.textUpload.selectedRange.location;
+        NSString *string = [self.textUpload.text substringToIndex:location];
+        if ([string hasSuffix:@"]"]) {
+            for (NSInteger i = string.length - 1; i >= 0; i --) {
+                char c = [string characterAtIndex:i];
+                [self.textUpload deleteBackward];
+                if (c == '[') {
+                    break;
+                }
+            }
+        } else {
+            [self.textUpload deleteBackward];
+            [self.textInput deleteBackward];
+        }
     }
     //键盘默认发送键
     if ([text isEqualToString:@"\n"]) {
