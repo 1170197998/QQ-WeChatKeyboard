@@ -34,11 +34,8 @@
     
     __weak typeof(self) weakSelf = self;
     self.inputToolbar.sendContent = ^(NSObject *content){
-        
-        NSLog(@"发射成功☀️:---%@",content);
-
-            NSMutableAttributedString *strM = [[NSMutableAttributedString alloc] initWithAttributedString:(NSAttributedString *)content];
-            weakSelf.textView.attributedText = strM;
+        NSLog(@"上传服务器内容☀️:---%@",(NSString *)content);
+        weakSelf.textView.text = (NSString *)content;
     };
     
     self.inputToolbar.inputToolbarFrameChange = ^(CGFloat height,CGFloat orignY){

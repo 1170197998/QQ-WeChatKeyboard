@@ -26,6 +26,7 @@
 @property (nonatomic,strong)CollectionViewFlowLayout *layout;
 @property (nonatomic,strong)NSMutableArray *defaultEmoticons;
 @property (nonatomic,strong)NSArray *emoticonImages;
+@property (nonatomic,strong)NSArray *emoticonImagesString;
 @end
 
 @implementation EmojiButtonView
@@ -38,6 +39,7 @@
         _emoticonImages = [NSMutableArray array];
         [[EmotionImages shareEmotinImages] initEmotionImages];
         _emoticonImages = [EmotionImages shareEmotinImages].images;
+        _emoticonImagesString = [NSMutableArray array];
         
         for (int i=0x1F600; i<=0x1F64F; i++) {
             if (i < 0x1F641 || i > 0x1F640) {
@@ -47,6 +49,7 @@
             }
         }
         
+        _emoticonImagesString = [_defaultEmoticons arrayByAddingObjectsFromArray:[EmotionImages shareEmotinImages].emotions];
         [_defaultEmoticons addObjectsFromArray:[EmotionImages shareEmotinImages].images];
 
         for (NSInteger i = 0;i < _defaultEmoticons.count;i ++) {

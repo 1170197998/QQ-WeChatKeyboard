@@ -14,6 +14,7 @@
 
 #import "InputToolbar.h"
 #import "UIView+Extension.h"
+#import "EmotionImages.h"
 
 @interface InputToolbar ()<UITextViewDelegate,EmojiButtonViewDelegate>
 @property (nonatomic, assign)CGFloat textInputHeight;
@@ -25,6 +26,7 @@
 
 @property (nonatomic,strong)UIButton *voiceButton;
 @property (nonatomic,strong)UITextView *textInput;
+@property (nonatomic,strong)UITextView *textUpload;
 @property (nonatomic,strong)UIButton *emojiButton;
 @property (nonatomic,strong)UIButton *moreButton;
 
@@ -151,6 +153,9 @@ static InputToolbar* _instance = nil;
     self.textInput.enablesReturnKeyAutomatically = YES;
     self.textInput.delegate = self;
     [self addSubview:self.textInput];
+    self.textUpload = [[UITextView alloc] init];
+    self.textUpload.delegate = self;
+
     
     self.emojiButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.textInput.frame) + 5, 9, 30, 30)];
     [self.emojiButton setImage:[UIImage imageNamed:@"liaotian_ic_biaoqing_nor"] forState:UIControlStateNormal];
@@ -186,16 +191,24 @@ static InputToolbar* _instance = nil;
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     self.textInput.inputView = nil;
+    self.textUpload.inputView = nil;
 }
 
 - (void)emojiButtonView:(EmojiButtonView *)emojiButtonView emojiText:(NSObject *)text
 {
-    if ([text  isEqual: deleteButtonId]) {
+    if ([text isEqual: deleteButtonId]) {
+        if ([text isKindOfClass:[UIImage class]]) {
+            [self.textUpload deleteBackward];
+        } else {
+            [self.textUpload deleteBackward];
+        }
         [self.textInput deleteBackward];
+        
         return;
     }
     if (![text isKindOfClass:[UIImage class]]) {
         [self.textInput replaceRange:self.textInput.selectedTextRange withText:(NSString *)text];
+        [self.textUpload replaceRange:self.textUpload.selectedTextRange withText:(NSString *)text];
     } else {
         NSTextAttachment *textAttachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil] ;
         textAttachment.image = (UIImage *)text;
@@ -208,33 +221,51 @@ static InputToolbar* _instance = nil;
         self.textInput.attributedText = strM;
         self.textInput.selectedRange = NSMakeRange(self.textInput.selectedRange.location + 1,0);
         [self.textInput.delegate textViewDidChange:self.textInput];
+        
+        NSString *stringImage = [EmotionImages shareEmotinImages].emotions[[[EmotionImages shareEmotinImages].images indexOfObject:(UIImage *)text]];
+        NSMutableString *mString = [NSMutableString stringWithString:self.textUpload.text];
+        [mString replaceCharactersInRange:self.textUpload.selectedRange withString:stringImage];
+        self.textUpload.text = mString;
+        self.textUpload.selectedRange = NSMakeRange(self.textUpload.selectedRange.location + 1,0);
+        [self.textInput.delegate textViewDidChange:self.textUpload];
     }
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
+    //默认键盘删除键
+    if ([text isEqualToString:@""]) {
+        [self.textUpload deleteBackward];
+    }
+    //键盘默认发送键
     if ([text isEqualToString:@"\n"]) {
         if (_sendContent) {
-            _sendContent(self.textInput.attributedText);
+            _sendContent(self.textUpload.text);
             self.y = SCREEN_HEIGHT - _keyboardHeight - InputToolbarHeight;
             _inputToolbarFrameChange(self.height,self.y);
         }
         textView.text = nil;
+        self.textUpload.text = nil;
         self.textInput.height = 36;
         self.height = InputToolbarHeight;
         return NO;
     }
+    NSMutableString *mString = [NSMutableString stringWithString:self.textUpload.text];
+    [mString replaceCharactersInRange:self.textUpload.selectedRange withString:text];
+    self.textUpload.text = mString;
+
     return YES;
 }
 
 - (void)emojiButtonView:(EmojiButtonView *)emojiButtonView sendButtonClick:(UIButton *)sender
 {
     if (_sendContent) {
-        _sendContent(self.textInput.attributedText);
+        _sendContent(self.textUpload.text);
         self.y = SCREEN_HEIGHT - _keyboardHeight - InputToolbarHeight;
         _inputToolbarFrameChange(self.height,self.y);
     }
     self.textInput.text = nil;
+    self.textUpload.text = nil;
     self.textInput.height = 36;
     self.height = InputToolbarHeight;
 }
@@ -313,8 +344,10 @@ static InputToolbar* _instance = nil;
 {
     if (isBecomeFirstResponder) {
         [self.textInput becomeFirstResponder];
+        [self.textUpload becomeFirstResponder];
     } else {
         [self.textInput resignFirstResponder];
+        [self.textUpload resignFirstResponder];
     }
 }
 
@@ -332,11 +365,13 @@ static InputToolbar* _instance = nil;
 - (void)clearInputToolbarContent
 {
     self.textInput.text = nil;
+    self.textUpload.text = nil;
 }
 
 - (void)resetInputToolbar
 {
     self.textInput.text = nil;
+    self.textUpload.text = nil;
     self.textInput.height = 36;
     self.height = InputToolbarHeight;
 }
