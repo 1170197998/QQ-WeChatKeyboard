@@ -256,7 +256,6 @@ static InputToolbar* _instance = nil;
             }
         } else {
             [self.textUpload deleteBackward];
-            [self.textInput deleteBackward];
         }
     }
     //键盘默认发送键
