@@ -197,13 +197,21 @@ static InputToolbar* _instance = nil;
 - (void)emojiButtonView:(EmojiButtonView *)emojiButtonView emojiText:(NSObject *)text
 {
     if ([text isEqual: deleteButtonId]) {
-        if ([text isKindOfClass:[UIImage class]]) {
-            [self.textUpload deleteBackward];
+        NSInteger location = self.textUpload.selectedRange.location;
+        NSString *string = [self.textUpload.text substringToIndex:location];
+        if ([string hasSuffix:@"]"]) {
+            for (NSInteger i = string.length - 1; i >= 0; i --) {
+                char c = [string characterAtIndex:i];
+                [self.textUpload deleteBackward];
+                if (c == '[') {
+                    break;
+                }
+            }
+            [self.textInput deleteBackward];
         } else {
             [self.textUpload deleteBackward];
+            [self.textInput deleteBackward];
         }
-        [self.textInput deleteBackward];
-        
         return;
     }
     if (![text isKindOfClass:[UIImage class]]) {
