@@ -183,9 +183,7 @@ static InputToolbar* _instance = nil;
         self.y = SCREEN_HEIGHT - _keyboardHeight - _textInputHeight - 5 - 8;
         self.height = _textInputHeight + 15;
     }
-    if ([_delegate respondsToSelector:@selector(inputToolbar:orignY:)]) {
-        [_delegate inputToolbar:self orignY:self.y];
-    }
+    _inputToolbarFrameChange(self.height,self.y);
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView

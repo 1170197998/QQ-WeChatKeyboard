@@ -12,7 +12,7 @@
 #import "InputToolbar.h"
 #import "UIView+Extension.h"
 
-@interface PushViewController ()<MoreButtonViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,InputToolbarDelegate>
+@interface PushViewController ()<MoreButtonViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic,strong)InputToolbar *inputToolbar;
 @property (nonatomic,assign)CGFloat inputToolbarY;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
@@ -29,7 +29,6 @@
     self.inputToolbar.width = self.view.width;
     self.inputToolbar.height = 49;
     self.inputToolbar.y = self.view.height - self.inputToolbar.height;
-    self.inputToolbar.delegate = self;
     [self.inputToolbar setMorebuttonViewDelegate:self];
     
     __weak typeof(self) weakSelf = self;
@@ -40,6 +39,15 @@
     
     self.inputToolbar.inputToolbarFrameChange = ^(CGFloat height,CGFloat orignY){
         _inputToolbarY = orignY;
+        /*
+         如果是当前界面是tableView可以直接使用以下代码调试位置
+        if (weakSelf.tableView.contentSize.height > orignY) {
+            [weakSelf.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_equalTo(0);
+            }];
+            [weakSelf.tableView setContentOffset:CGPointMake(0, weakSelf.tableView.contentSize.height - orignY) animated:YES];
+        }
+         */
     };
     [self.inputToolbar resetInputToolbar];
 }

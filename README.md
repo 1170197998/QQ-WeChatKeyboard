@@ -24,7 +24,7 @@ UIView+Extension:UIView工具类
 加头文件:
     #import "InputToolbar.h"
 遵守协议
-    <MoreButtonViewDelegate,InputToolbarDelegate>
+    <MoreButtonViewDelegate>
 添加属性:
     @property (nonatomic,strong)InputToolbar *inputToolbar;
 创建inputToolbar
@@ -38,7 +38,6 @@ UIView+Extension:UIView工具类
     self.inputToolbar.height = 49;
     self.inputToolbar.y = self.view.height - self.inputToolbar.height;
 设定代理
-    self.inputToolbar.delegate = self;
     [self.inputToolbar setMorebuttonViewDelegate:self];
 点击发送按钮回调,顺便传回输入内容    
     __weak typeof(self) weakSelf = self;
@@ -59,14 +58,6 @@ UIView+Extension:UIView工具类
     self.inputToolbar.inputToolbarFrameChange = ^(CGFloat height,CGFloat orignY){
         _inputToolbarY = orignY;
     };
-
-实现协议方法
-//在输入的过程中会调用此方法,随着输入框的增高进而调整界面布局
-- (void)inputToolbar:(InputToolbar *)inputToolbar orignY:(CGFloat)orignY
-{
-	 _inputToolbarY = orignY
-	 [self.tableView setContentOffset:CGPointMake(0, _tableView.contentSize.height -  (0 + orignY + 0)) animated:NO];
-}
 
 //点击MoreButtonView中的按钮会调用此方法(根据实际需求自行增删)
 - (void)moreButtonView:(MoreButtonView *)moreButtonView didClickButton:(MoreButtonViewButtonType)buttonType

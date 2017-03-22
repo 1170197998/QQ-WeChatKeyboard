@@ -10,14 +10,9 @@
 #import "MoreButtonView.h"
 #import "VoiceButtonView.h"
 #import "EmojiButtonView.h"
-@class InputToolbar;
-@protocol InputToolbarDelegate <NSObject>
-- (void)inputToolbar:(InputToolbar *)inputToolbar orignY:(CGFloat )orignY;
-@end
 
 @interface InputToolbar : UIView
 
-@property (nonatomic,weak) id<InputToolbarDelegate>delegate;
 +(instancetype) shareInstance;
 
 /**
