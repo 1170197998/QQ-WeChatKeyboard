@@ -33,12 +33,12 @@
 /**
  *  点击发送后要发送的文本
  */
-@property (nonatomic,strong)void(^sendContent)(NSObject *content);
+@property (nonatomic,copy)void(^sendContent)(NSObject *content);
 
 /**
  *  InputToolbar所占高度
  */
-@property (nonatomic,strong)void(^inputToolbarFrameChange)(CGFloat height,CGFloat orignY);
+@property (nonatomic,copy)void(^inputToolbarFrameChange)(CGFloat height,CGFloat orignY);
 
 /**
  *  添加moreButtonView代理

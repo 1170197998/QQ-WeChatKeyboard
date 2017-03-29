@@ -38,7 +38,7 @@
     };
     
     self.inputToolbar.inputToolbarFrameChange = ^(CGFloat height,CGFloat orignY){
-        _inputToolbarY = orignY;
+        weakSelf.inputToolbarY = orignY;
         /*
          如果是当前界面是tableView可以直接使用以下代码调试位置
         if (weakSelf.tableView.contentSize.height > orignY) {
