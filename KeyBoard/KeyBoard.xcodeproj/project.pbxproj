@@ -138,13 +138,7 @@
 		9A8DF11B1E00E7E600CE9F21 /* UITextView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DF0951E00E7E600CE9F21 /* UITextView+Category.m */; };
 		9A8DF11C1E00E7E600CE9F21 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DF0971E00E7E600CE9F21 /* UIView+Extension.m */; };
 		9A8DF11D1E00E7E600CE9F21 /* VoiceButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9A8DF0991E00E7E600CE9F21 /* VoiceButtonView.m */; };
-		9A8DF11E1E00E7E600CE9F21 /* chat_ic_delete_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8DF09B1E00E7E600CE9F21 /* chat_ic_delete_nor.png */; };
-		9A8DF11F1E00E7E600CE9F21 /* chat_ic_delete_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8DF09C1E00E7E600CE9F21 /* chat_ic_delete_press.png */; };
-		9A8DF1201E00E7E600CE9F21 /* chat_ic_delete_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8DF09D1E00E7E600CE9F21 /* chat_ic_delete_press@2x.png */; };
-		9A8DF1211E00E7E600CE9F21 /* chat_ic_delete_press@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8DF09E1E00E7E600CE9F21 /* chat_ic_delete_press@3x.png */; };
 		9A8DF17A1E00E7E600CE9F21 /* img_defaulthead_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8DF0F81E00E7E600CE9F21 /* img_defaulthead_nor.png */; };
-		9A8DF17B1E00E7E600CE9F21 /* img_defaulthead_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8DF0F91E00E7E600CE9F21 /* img_defaulthead_nor@2x.png */; };
-		9A8DF17C1E00E7E600CE9F21 /* img_defaulthead_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8DF0FA1E00E7E600CE9F21 /* img_defaulthead_nor@3x.png */; };
 		9A8DF17D1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8DF0FB1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor.png */; };
 		9A8DF17E1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8DF0FC1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor@2x.png */; };
 		9A8DF17F1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A8DF0FD1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor@3x.png */; };
@@ -319,13 +313,7 @@
 		9A8DF0971E00E7E600CE9F21 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		9A8DF0981E00E7E600CE9F21 /* VoiceButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceButtonView.h; sourceTree = "<group>"; };
 		9A8DF0991E00E7E600CE9F21 /* VoiceButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceButtonView.m; sourceTree = "<group>"; };
-		9A8DF09B1E00E7E600CE9F21 /* chat_ic_delete_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_ic_delete_nor.png; sourceTree = "<group>"; };
-		9A8DF09C1E00E7E600CE9F21 /* chat_ic_delete_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_ic_delete_press.png; sourceTree = "<group>"; };
-		9A8DF09D1E00E7E600CE9F21 /* chat_ic_delete_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_ic_delete_press@2x.png"; sourceTree = "<group>"; };
-		9A8DF09E1E00E7E600CE9F21 /* chat_ic_delete_press@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_ic_delete_press@3x.png"; sourceTree = "<group>"; };
 		9A8DF0F81E00E7E600CE9F21 /* img_defaulthead_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_defaulthead_nor.png; sourceTree = "<group>"; };
-		9A8DF0F91E00E7E600CE9F21 /* img_defaulthead_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_defaulthead_nor@2x.png"; sourceTree = "<group>"; };
-		9A8DF0FA1E00E7E600CE9F21 /* img_defaulthead_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img_defaulthead_nor@3x.png"; sourceTree = "<group>"; };
 		9A8DF0FB1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = liaotian_ic_biaoqing_nor.png; sourceTree = "<group>"; };
 		9A8DF0FC1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liaotian_ic_biaoqing_nor@2x.png"; sourceTree = "<group>"; };
 		9A8DF0FD1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liaotian_ic_biaoqing_nor@3x.png"; sourceTree = "<group>"; };
@@ -564,17 +552,11 @@
 		9A8DF09A1E00E7E600CE9F21 /* KerboardResource */ = {
 			isa = PBXGroup;
 			children = (
+				9A48CE9E1E9F7CFF002A4E87 /* emotion */,
 				9A48CF7E1E9F836D002A4E87 /* Emoji.plist */,
 				9A48CF7A1E9F832E002A4E87 /* img_defaulthead_nor@2x.png */,
 				9A48CF7B1E9F832E002A4E87 /* img_defaulthead_nor@3x.png */,
-				9A48CE9E1E9F7CFF002A4E87 /* emotion */,
-				9A8DF09B1E00E7E600CE9F21 /* chat_ic_delete_nor.png */,
-				9A8DF09C1E00E7E600CE9F21 /* chat_ic_delete_press.png */,
-				9A8DF09D1E00E7E600CE9F21 /* chat_ic_delete_press@2x.png */,
-				9A8DF09E1E00E7E600CE9F21 /* chat_ic_delete_press@3x.png */,
 				9A8DF0F81E00E7E600CE9F21 /* img_defaulthead_nor.png */,
-				9A8DF0F91E00E7E600CE9F21 /* img_defaulthead_nor@2x.png */,
-				9A8DF0FA1E00E7E600CE9F21 /* img_defaulthead_nor@3x.png */,
 				9A8DF0FB1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor.png */,
 				9A8DF0FC1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor@2x.png */,
 				9A8DF0FD1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor@3x.png */,
@@ -666,11 +648,9 @@
 				9A48CF2A1E9F7CFF002A4E87 /* Expression_30@2x.png in Resources */,
 				9A8DF18C1E00E7E600CE9F21 /* liaotian_ic_jianpan_press.png in Resources */,
 				9A8DF1921E00E7E600CE9F21 /* liaotian_ic_yuyin_nor.png in Resources */,
-				9A8DF1211E00E7E600CE9F21 /* chat_ic_delete_press@3x.png in Resources */,
 				9A48CF5F1E9F7CFF002A4E87 /* Expression_79@2x.png in Resources */,
 				9A48CF3C1E9F7CFF002A4E87 /* Expression_47@2x.png in Resources */,
 				9A48CF331E9F7CFF002A4E87 /* Expression_39@2x.png in Resources */,
-				9A8DF11E1E00E7E600CE9F21 /* chat_ic_delete_nor.png in Resources */,
 				9A8DF18D1E00E7E600CE9F21 /* liaotian_ic_jianpan_press@2x.png in Resources */,
 				9A48CF421E9F7CFF002A4E87 /* Expression_52@2x.png in Resources */,
 				9A48CF241E9F7CFF002A4E87 /* Expression_25@2x.png in Resources */,
@@ -719,14 +699,12 @@
 				9A48CF1D1E9F7CFF002A4E87 /* Expression_19@2x.png in Resources */,
 				9A48CF101E9F7CFF002A4E87 /* Expression_102@2x.png in Resources */,
 				9A48CF2C1E9F7CFF002A4E87 /* Expression_32@2x.png in Resources */,
-				9A8DF17B1E00E7E600CE9F21 /* img_defaulthead_nor@2x.png in Resources */,
 				9A48CF221E9F7CFF002A4E87 /* Expression_23@2x.png in Resources */,
 				9A8DF17F1E00E7E600CE9F21 /* liaotian_ic_biaoqing_nor@3x.png in Resources */,
 				9A48CF631E9F7CFF002A4E87 /* Expression_82@2x.png in Resources */,
 				9A48CF401E9F7CFF002A4E87 /* Expression_50@2x.png in Resources */,
 				9A8DF1821E00E7E600CE9F21 /* liaotian_ic_biaoqing_press@3x.png in Resources */,
 				9A48CF7F1E9F836D002A4E87 /* Emoji.plist in Resources */,
-				9A8DF11F1E00E7E600CE9F21 /* chat_ic_delete_press.png in Resources */,
 				9A48CF191E9F7CFF002A4E87 /* Expression_15@2x.png in Resources */,
 				9A48CF311E9F7CFF002A4E87 /* Expression_37@2x.png in Resources */,
 				9A48CF0C1E9F7CFF002A4E87 /* DeleteEmoticonBtnHL@2x.png in Resources */,
@@ -767,7 +745,6 @@
 				9A48CF261E9F7CFF002A4E87 /* Expression_27@2x.png in Resources */,
 				9A48CF201E9F7CFF002A4E87 /* Expression_21@2x.png in Resources */,
 				9A48CF371E9F7CFF002A4E87 /* Expression_42@2x.png in Resources */,
-				9A8DF17C1E00E7E600CE9F21 /* img_defaulthead_nor@3x.png in Resources */,
 				9A8DF1901E00E7E600CE9F21 /* liaotian_ic_press@2x.png in Resources */,
 				9A48CF681E9F7CFF002A4E87 /* Expression_87@2x.png in Resources */,
 				9A8DF17A1E00E7E600CE9F21 /* img_defaulthead_nor.png in Resources */,
@@ -795,7 +772,6 @@
 				9A8DF1881E00E7E600CE9F21 /* liaotian_ic_gengduo_press@3x.png in Resources */,
 				9A48CF501E9F7CFF002A4E87 /* Expression_65@2x.png in Resources */,
 				9A48CF441E9F7CFF002A4E87 /* Expression_54@2x.png in Resources */,
-				9A8DF1201E00E7E600CE9F21 /* chat_ic_delete_press@2x.png in Resources */,
 				9A48CF591E9F7CFF002A4E87 /* Expression_73@2x.png in Resources */,
 				9A48CF691E9F7CFF002A4E87 /* Expression_88@2x.png in Resources */,
 				9A8DF18A1E00E7E600CE9F21 /* liaotian_ic_jianpan_nor@2x.png in Resources */,

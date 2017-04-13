@@ -32,8 +32,8 @@
 {
     if ([string isEqual: deleteButtonId]) {
         [self.button setTitle:nil forState:UIControlStateNormal];
-        [self.button setImage:[UIImage imageNamed:@"chat_ic_delete_nor"] forState:UIControlStateNormal];
-        [self.button setImage:[UIImage imageNamed:@"chat_ic_delete_press"] forState:UIControlStateHighlighted];
+        [self.button setImage:[UIImage imageNamed:@"DeleteEmoticonBtn"] forState:UIControlStateNormal];
+        [self.button setImage:[UIImage imageNamed:@"DeleteEmoticonBtnHL"] forState:UIControlStateHighlighted];
         [self.button setFrame:CGRectMake(7, 3, self.contentView.frame.size.width - 10, self.contentView.frame.size.height - 6)];
      } else {
         [self.button setImage:nil forState:UIControlStateNormal];
