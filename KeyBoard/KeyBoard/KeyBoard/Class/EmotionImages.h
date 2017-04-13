@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @interface EmotionImages : NSObject
-@property(nonatomic,strong)NSArray* emotions;
-@property(nonatomic,strong)NSArray<UIImage*>* images;
+@property(nonatomic,strong)NSMutableArray* emotions;
+@property(nonatomic,strong)NSMutableArray<UIImage*>* images;
 - (void)initEmotionImages;
 + (EmotionImages *)shareEmotinImages;
 
