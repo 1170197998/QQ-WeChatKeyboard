@@ -52,6 +52,10 @@
     [self.inputToolbar resetInputToolbar];
 }
 
+- (void)dealloc {
+    NSLog(@"dealloc");
+}
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     self.inputToolbar.isBecomeFirstResponder = NO;

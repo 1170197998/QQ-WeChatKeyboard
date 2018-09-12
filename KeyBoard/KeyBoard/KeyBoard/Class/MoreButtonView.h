@@ -23,5 +23,5 @@ typedef enum {
 @end
 
 @interface MoreButtonView : UIView
-@property (nonatomic,strong) id<MoreButtonViewDelegate>delegate;
+@property (nonatomic,weak) id<MoreButtonViewDelegate>delegate;
 @end
